@@ -1,32 +1,34 @@
 require('dotenv').config();
 
 const express = require('express');
-const cors = require('cors');
+const cors = require('cors')
 
-const { dbConnection } = require('./database/config');
+const { dbConection } = require('./database/config');
 
-// Crear el servidor express
 const app = express();
 
-// CORS
+// configurar CORS
 app.use(cors());
 
-// Base de Datos
-dbConnection();
+//Llamamos la bd
+dbConection();
 
-//RUTAS
-app.get( '/', (req, resp) => {
+// Crear  Rutas
+app.get('/', (req, res) => {
 
-    resp.json({
-        ok : true,
-        msg: 'Hola mundo pecho frío, pishica'
+    res.json({
+        ok: true,
+        msg: 'Todo bien'
     })
 
 });
 
+// Crear el server
+app.listen( process.env.PORT , () => {
+    console.log('Server running in portss ' + process.env.PORT);
+});
 
 
 
-
-
-app.listen( process.env.PORT, () => console.log(`SERVER corriendo en ${process.env.PORT}` ) );
+//mean_user
+//hRWnWMCtkFSox5CB

@@ -1,18 +1,26 @@
 {
-  "name": "admin-server",
+  "name": "adminserver",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
     "start:dev": "nodemon index.js"
   },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Danicocorules/Admin-Pro-Backend.git"
+  },
   "keywords": [],
   "author": "",
   "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Danicocorules/Admin-Pro-Backend/issues"
+  },
+  "homepage": "https://github.com/Danicocorules/Admin-Pro-Backend#readme",
   "dependencies": {
     "cors": "^2.8.5",
     "dotenv": "^16.0.3",
     "express": "^4.18.2",
-    "mongoose": "^6.7.2"
+    "mongoose": "^6.8.3"
   }
 }
