@@ -8,14 +8,11 @@ const getHospitals = async ( req, res = response ) => {
     
         const hospitalsDB = await Hospital.find().populate('usuario', 'nombre img');
 
-
         res.status(200).json({
             ok: true,
             msg: 'Hospitals traídos',
             hospitals: hospitalsDB
         });
-
-
 
     } catch (error) {
     
@@ -25,8 +22,6 @@ const getHospitals = async ( req, res = response ) => {
             msg: 'no se han traído los hospitales'
         });    
     }
-    
-
 };
 
 const createHospitals = async ( req, res = response ) => {

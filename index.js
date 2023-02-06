@@ -24,6 +24,7 @@ app.use( '/api/hospitals', require( './routes/hospitals.routes') );
 app.use( '/api/doctors', require( './routes/doctors.routes') );
 app.use( '/api/insurances', require( './routes/insurances.routes') );
 app.use( '/api/search', require( './routes/search.routes') );
+app.use( '/api/upload', require( './routes/upload.routes') );
 
 // Crear el server
 app.listen( process.env.PORT , () => {

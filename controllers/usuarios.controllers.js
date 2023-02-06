@@ -1,4 +1,3 @@
-
 const { response } = require('express');
 const Usuario = require( '../models/usuario.model' );
 const bcrypt = require('bcryptjs');

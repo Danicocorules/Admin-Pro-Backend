@@ -27,7 +27,6 @@ const getDoctors = async ( req, res = response ) => {
         });
 
     } catch (error) {
-        console.log(error);
         res.status(500).json({
             ok: false,
             msg: 'NO se han traído los doctores'
@@ -46,8 +45,6 @@ const createDoctors = async ( req, res = response ) => {
     })
 
     try {
-    
-        
         const drDB = await doctor.save();
 
         res.status(200).json({
@@ -57,8 +54,6 @@ const createDoctors = async ( req, res = response ) => {
         })
 
     } catch (error) {
-        console.log(error);
-        
         res.status(500).json({
             ok: false,
             msg: 'doctor NO create'
