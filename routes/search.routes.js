@@ -3,17 +3,14 @@
 */
 const { Router } = require('express');
 
-const { globalSearch } = require('../controllers/search.controllers');
+const { globalSearch, getTypeCollection } = require('../controllers/search.controllers');
+
 const { validarJWT } = require('../middlewares/validar-jwt');
 
 const router = Router();
 
 
-router.get( '/:term',
-    [
-        validarJWT
-    ]
-    ,globalSearch 
-);
+router.get( '/:term', validarJWT, globalSearch );
+router.get( '/:type/:term', validarJWT ,getTypeCollection )
 
 module.exports = router;

@@ -1,5 +1,6 @@
 const { response } = require('express');
 const Usuario = require('../models/usuario.model');
+const { googleVerify } = require('../helpers/google-verify');
 
 const { generateJwt } = require('../helpers/jwt');
 
@@ -18,7 +19,7 @@ const login = async ( req, res = response ) => {
 
             return res.status(404).json({
                 ok: false,
-                msg: 'email no valido'
+                msg: 'email no valido pendejo'
             })
         }
 
@@ -32,7 +33,7 @@ const login = async ( req, res = response ) => {
             })
         }
 
-        //Generar WebToken
+        //Generate WebToken
         const token = await generateJwt( usuarioDB.id, usuarioDB.nombre );
 
         res.json({
@@ -48,9 +49,66 @@ const login = async ( req, res = response ) => {
             ok: false,
             msg: 'Hable con el sistemas'
         })
-
-
     }
 }
 
-module.exports = { login };
+const googleSignin = async( req, res = response ) => {
+    
+    try {
+        const { email, name, picture } = await googleVerify( req.body.token );
+
+        const userDB = await Usuario.findOne({ email });
+        let usuario;
+
+        if ( !userDB ) {
+            usuario = new Usuario({
+                email,
+                nombre: name,
+                img: picture,
+                password: '@@@',
+                google: true
+            }) 
+        } else {
+            usuario = usuarioDB;
+            usuario.google = true;
+        }
+
+        await usuario.save();
+
+        //Generate WebToken
+        const token = await generateJwt( usuario.id );
+
+        res.json({
+            ok: true,
+            email, name, picture,
+            token
+        })
+
+    } catch (error) {
+        console.log(error);
+        res.status(400).json({
+            ok: false,
+            msg: 'Google\'s token is invalid'
+        })
+    }
+
+    res.status(200).json({
+        ok: true,
+        msg: req.body.token
+    })
+}
+
+const renewToken = async ( req, res = response ) => {
+
+    const uid = req.uid;
+
+    //Generate WebToken
+    const token = await generateJwt( uid );
+
+    res.json({
+        ok: true,
+        token
+    })
+}
+
+module.exports = { login, googleSignin, renewToken };

@@ -1,5 +1,5 @@
 /*
-    Ruta: /api/gender
+    Route: /api/gender
 */
 const { Router } = require('express');
 const { setGender } = require('../controllers/gender.controllers');
