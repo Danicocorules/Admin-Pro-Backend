@@ -31,9 +31,8 @@ app.use( '/api/upload', require( './routes/upload.routes') );
 
 // Crear el server
 app.listen( process.env.PORT , () => {
-    console.log('Server running in ports ' + process.env.PORT);
+    console.log('Server running in port ' + process.env.PORT);
 });
-
 
 //mean_user
 //hRWnWMCtkFSox5CB
