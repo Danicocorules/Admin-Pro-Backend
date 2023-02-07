@@ -66,7 +66,6 @@ const uploadFile = async ( req, res = response ) => {
             fileName
         });
     });
-   
 }
 
 const getImg = ( req, res = respones ) => {
