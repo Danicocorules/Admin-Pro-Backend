@@ -24,8 +24,8 @@ router.post('/',
     createDoctors 
 );
 
-router.put('/:id', editDoctors );
+router.put('/:id', validarJWT, editDoctors );
 
-router.delete('/:id', deleteDoctors );
+router.delete('/:id', validarJWT, deleteDoctors );
 
 module.exports = router;

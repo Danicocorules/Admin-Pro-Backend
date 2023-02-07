@@ -12,9 +12,9 @@ const getDoctors = async ( req, res = response ) => {
             
             Doctor.find()
                 .populate('usuario', 'nombre img')
-                .populate('hospital', 'nombre')
-                .skip(show)
-                .limit( 5 ),
+                .populate('hospital', 'nombre'),
+                //.skip(show)
+                //.limit( 5 ),
 
             Doctor.count()
         
@@ -63,6 +63,29 @@ const createDoctors = async ( req, res = response ) => {
 }
 
 const editDoctors = async ( req, res = response ) => {
+    
+    const drId = req.params.id;
+    const userUpdating = req.uid;
+        
+    try {
+        
+        const drBd = await Doctor.findById( drId );
+
+        if ( drBd ) {
+            const drChanges = {
+                ...req.body,
+                userUpdating
+            }
+            await Doctor.findByIdAndUpdate( drId, drChanges, {new: true}  );    
+        } 
+
+    } catch (error) {
+        res.status(404).json({
+            ok: true,
+            msg: 'Impossible edit this Doctor.'
+        })
+    }
+
     res.status(200).json({
         ok: true,
         msg: 'edit D'
@@ -70,6 +93,24 @@ const editDoctors = async ( req, res = response ) => {
 }
 
 const deleteDoctors = async ( req, res = response ) => {
+    
+    const drDelete = req.params.id;
+
+    try {
+        
+        const drBd = await Doctor.findById( drDelete );
+
+        if ( drBd ) {
+            await Doctor.findByIdAndDelete( drDelete );
+        }
+
+    } catch (error) {
+        res.status(404).json({
+            ok: true,
+            msg: 'Impossible delete this Doctor.'
+        })
+    }
+    
     res.status(200).json({
         ok: true,
         msg: 'delete D'
