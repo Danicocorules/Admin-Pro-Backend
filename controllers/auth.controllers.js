@@ -69,7 +69,8 @@ const googleSignin = async( req, res = response ) => {
                 google: true
             }) 
         } else {
-            usuario = usuarioDB;
+            // usuario = usuarioDB;
+            usuario = userDB;
             usuario.google = true;
         }
 
@@ -91,7 +92,7 @@ const googleSignin = async( req, res = response ) => {
             msg: 'Google\'s token is invalid'
         })
     }
-
+    
     res.status(200).json({
         ok: true,
         msg: req.body.token
